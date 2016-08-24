@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <modules>
+        <Balance_Googletrustedstore>
+            <version>1.0.0</version>
+        </Balance_Googletrustedstore>
+    </modules>
+    <global>
+        <blocks>
+            <googletrustedstore>
+                <class>Balance_Googletrustedstore_Block</class>
+            </googletrustedstore>
+        </blocks>
+        <helpers>
+            <googletrustedstore>
+                <class>Balance_Googletrustedstore_Helper</class>
+            </googletrustedstore>
+        </helpers>
+    </global>
+    <frontend>
+        <layout>
+            <updates>
+                <googletrustedstore>
+                    <file>googletrustedstore.xml</file>
+                </googletrustedstore>
+            </updates>
+        </layout>
+    </frontend>
+</config>

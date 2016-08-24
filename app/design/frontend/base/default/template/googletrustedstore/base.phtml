@@ -1,0 +1,31 @@
+<?php
+$_helper = $this->helper('googletrustedstore');
+$_enabled = $_helper->isGoogleTrustedStoreAvailable();
+if ($_enabled) {
+?>
+<!-- BEGIN: Google Trusted Stores  -->
+<script type="text/javascript">
+var gts = gts || [];
+
+gts.push(["id","<?php echo $this->getTrustedStoreId();?>"]);
+gts.push(["locale", "<?php echo $this->getLocale();?>"]);
+
+<?php if ($_helper->getOfferId()) {?>
+gts.push(["google_base_offer_id", "<?php echo $_helper->getOfferId();?>"]);
+gts.push(["google_base_subaccount_id", "<?php echo $this->getShoppingAccountId();?>"]);
+gts.push(["google_base_country", "<?php echo $this->getShoppingCountry();?>"]);
+gts.push(["google_base_language", "<?php echo $this->getShoppingLanguage();?>"]);
+<?php } ?>
+
+(function() {
+	var scheme = (("https:" == document.location.protocol) ? "https://" : "http://"); var gts = document.createElement("script");
+	gts.type = "text/javascript";
+	gts.async = true;
+	gts.src = scheme + "www.googlecommerce.com/trustedstores/gtmp_compiled.js";
+	var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(gts, s);
+	})();
+</script>
+<!-- END: Google Trusted Stores -->
+<?php
+}
+?>

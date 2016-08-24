@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<layout version="0.1.0">
+    <default>
+        <reference name="before_body_end">
+            <block type="googletrustedstore/base" name="google_trusted_store" as="google_trusted_store" />
+        </reference>
+    </default>
+    <checkout_onepage_success>
+    	<reference name="before_body_end">
+    		<block type="googletrustedstore/order" name="google_trusted_store_order" as="google_trusted_store_order" />
+    	</reference>
+    </checkout_onepage_success>
+</layout>

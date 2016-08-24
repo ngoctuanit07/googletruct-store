@@ -1,0 +1,54 @@
+<?php
+$_helper = $this->helper('googletrustedstore');
+$_enabled = $_helper->isGoogleTrustedStoreAvailable();
+$_order = $_helper->getLastOrder();
+$_items = $_helper->getOrderItems($_order);
+if ($_enabled && $_order->getId() && !empty($_items)) {
+	//$_shipDate = $_helper->getShipDate($_items);
+    $_shipDate = $_helper->getShipDateNew($_items);
+?>
+<!-- START Google Trusted Stores Order -->
+<div id="gts-order" style="display:none">
+
+<!-- start order and merchant information -->
+<span id="gts-o-id"><?php echo $_order->getIncrementId()?></span>
+<span id="gts-o-domain"><?php echo $_helper->getDomain()?></span>
+<span id="gts-o-email"><?php echo $_order->getCustomerEmail();?></span>
+<span id="gts-o-country"><?php echo $_helper->getCustomerCountry($_order);?></span>
+<span id="gts-o-currency"><?php echo $_order->getOrderCurrencyCode();?></span>
+<span id="gts-o-total"><?php echo round($_order->getGrandTotal(),2);?></span>
+<span id="gts-o-discounts"><?php echo round($_order->getDiscountAmount(),2);?></span>
+<span id="gts-o-shipping-total"><?php echo round($_order->getShippingAmount(),2);?></span>
+<span id="gts-o-tax-total"><?php echo round($_order->getTaxAmount(),2);?></span>
+<span id="gts-o-est-ship-date"><?php echo $_shipDate;?></span>
+<span id="gts-o-est-delivery-date"><?php echo $_helper->getDeliveryDateNew($_shipDate); ?></span>
+<span id="gts-o-has-preorder"><?php echo $_helper->getBackorderFlag($_items);?></span>
+<span id="gts-o-has-digital"><?php echo $_helper->getDigitalFlag($_items)?></span>
+<!-- end order and merchant information -->
+
+<!-- start repeated item specific information -->
+<?php
+foreach($_items as $_item) {?>
+<!-- item -->
+<span class="gts-item">
+	<span class="gts-i-name"><?php echo $_item->getName();?></span>
+	<span class="gts-i-price"><?php echo round($_item->getPrice(),2);?></span>
+	<span class="gts-i-quantity"><?php echo round($_item->getQtyOrdered(),2);?></span>
+<?php
+	$_shoppingId = $_helper->getShoppingId($_item->getProductId());  
+if ($_shoppingId) {?>
+	<span class="gts-i-prodsearch-id"><?php echo $_shoppingId; ?></span>
+	<span class="gts-i-prodsearch-store-id"><?php echo $_helper->getFeedAccountId();?></span>
+	<span class="gts-i-prodsearch-country"><?php echo $this->getShoppingCountry();?></span>
+	<span class="gts-i-prodsearch-language"><?php echo $this->getShoppingLanguage();?></span>
+<?php }?>
+</span>
+<!-- end item -->
+<?php 	
+}
+?>
+<!-- end repeated item specific information -->
+</div>
+<?php 
+}
+?>

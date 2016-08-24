@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<config>
+    <modules>
+        <Balance_Googletrustedstore>
+            <active>true</active>
+            <codePool>local</codePool>
+        </Balance_Googletrustedstore>
+    </modules>
+</config>
